@@ -1,0 +1,9 @@
+{
+	"name": "murali251102",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "e987f549-df85-4ba3-bd56-2e91542bc7f6",
+		"tenantId": "ed1418df-7c6c-436e-94d3-decbbe99a68f"
+	}
+}
