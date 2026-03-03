@@ -26,7 +26,26 @@
 							"type": "DelimitedTextReadSettings"
 						}
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
 				},
 				"inputs": [
 					{
@@ -39,6 +58,30 @@
 							},
 							"df_directory2": {
 								"value": "@pipeline().parameters.pp_directory2_in",
+								"type": "Expression"
+							},
+							"df_filename2": {
+								"value": "@pipeline().parameters.pp_filename2",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Parameter_Dataset2",
+						"type": "DatasetReference",
+						"parameters": {
+							"df_filesystem2": {
+								"value": "@pipeline().parameters.pp_filesystem2",
+								"type": "Expression"
+							},
+							"df_directory2": {
+								"value": "@pipeline().parameters.pp_directory2_out",
+								"type": "Expression"
+							},
+							"df_filename2": {
+								"value": "@pipeline().parameters.pp_filename2",
 								"type": "Expression"
 							}
 						}
