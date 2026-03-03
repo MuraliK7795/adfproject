@@ -91,7 +91,14 @@
 			{
 				"name": "Copy data2",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Copy data1",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -160,6 +167,14 @@
 						"parameters": {
 							"df_filesystem2": {
 								"value": "@pipeline().parameters.pp_filesystem2",
+								"type": "Expression"
+							},
+							"df_directory2": {
+								"value": "@pipeline().parameters.pp_directory2_arch",
+								"type": "Expression"
+							},
+							"df_filename2": {
+								"value": "@pipeline().parameters.pp_filename2",
 								"type": "Expression"
 							}
 						}
