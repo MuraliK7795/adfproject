@@ -87,6 +87,84 @@
 						}
 					}
 				]
+			},
+			{
+				"name": "Copy data2",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Parameter_Dataset2",
+						"type": "DatasetReference",
+						"parameters": {
+							"df_filesystem2": {
+								"value": "@pipeline().parameters.pp_filesystem2",
+								"type": "Expression"
+							},
+							"df_directory2": {
+								"value": "@pipeline().parameters.pp_directory2_out",
+								"type": "Expression"
+							},
+							"df_filename2": {
+								"value": "@pipeline().parameters.pp_filename2",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Parameter_Dataset2",
+						"type": "DatasetReference",
+						"parameters": {
+							"df_filesystem2": {
+								"value": "@pipeline().parameters.pp_filesystem2",
+								"type": "Expression"
+							}
+						}
+					}
+				]
 			}
 		],
 		"parameters": {
@@ -100,6 +178,9 @@
 				"type": "string"
 			},
 			"pp_filename2": {
+				"type": "string"
+			},
+			"pp_directory2_arch": {
 				"type": "string"
 			}
 		},
