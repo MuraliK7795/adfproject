@@ -1,0 +1,44 @@
+{
+	"name": "Parameter_Dataset2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"df_filesystem2": {
+				"type": "string"
+			},
+			"df_directory2": {
+				"type": "string"
+			},
+			"df_filename2": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().df_filename2",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().df_directory2_in",
+					"type": "Expression"
+				},
+				"fileSystem": {
+					"value": "@dataset().df_filesystem2",
+					"type": "Expression"
+				}
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
