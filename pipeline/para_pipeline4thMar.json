@@ -59,6 +59,10 @@
 							"df_directory3": {
 								"value": "@pipeline().parameters.pp_directory3_in",
 								"type": "Expression"
+							},
+							"df_filename3": {
+								"value": "@pipeline().parameters.pp_filename3",
+								"type": "Expression"
 							}
 						}
 					}
@@ -74,6 +78,10 @@
 							},
 							"df_directory3": {
 								"value": "@pipeline().parameters.pp_directory3_out",
+								"type": "Expression"
+							},
+							"df_filename3": {
+								"value": "@pipeline().parameters.pp_filename3",
 								"type": "Expression"
 							}
 						}
@@ -144,6 +152,10 @@
 							"df_directory3": {
 								"value": "@pipeline().parameters.pp_directory3_out",
 								"type": "Expression"
+							},
+							"df_filename3": {
+								"value": "@pipeline().parameters.pp_filename3",
+								"type": "Expression"
 							}
 						}
 					}
@@ -159,6 +171,10 @@
 							},
 							"df_directory3": {
 								"value": "@pipeline().parameters.pp_directory3_arch",
+								"type": "Expression"
+							},
+							"df_filename3": {
+								"value": "@pipeline().parameters.pp_filename3",
 								"type": "Expression"
 							}
 						}
