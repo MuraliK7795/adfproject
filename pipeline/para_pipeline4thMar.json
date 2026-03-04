@@ -1,0 +1,116 @@
+{
+	"name": "para_pipeline4thMar",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "PArameter33",
+						"type": "DatasetReference",
+						"parameters": {
+							"df_filesystem3": {
+								"value": "@pipeline().parameters.pp_filesystem3",
+								"type": "Expression"
+							},
+							"df_directory3": {
+								"value": "@pipeline().parameters.pp_directory3_in",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "PArameter33",
+						"type": "DatasetReference",
+						"parameters": {
+							"df_filesystem3": {
+								"value": "@pipeline().parameters.pp_filesystem3",
+								"type": "Expression"
+							},
+							"df_directory3": {
+								"value": "@pipeline().parameters.pp_directory3_out",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			},
+			{
+				"name": "Copy data2",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"enableStaging": false
+				}
+			}
+		],
+		"parameters": {
+			"pp_filesystem3": {
+				"type": "string"
+			},
+			"pp_directory3_in": {
+				"type": "string"
+			},
+			"pp_directory3_out": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "Project1"
+		},
+		"annotations": []
+	}
+}
