@@ -11,9 +11,6 @@
 			},
 			"df_directory3_in": {
 				"type": "string"
-			},
-			"df_directory3_out": {
-				"type": "string"
 			}
 		},
 		"annotations": [],
