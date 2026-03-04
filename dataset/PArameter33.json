@@ -9,7 +9,7 @@
 			"df_filesystem3": {
 				"type": "string"
 			},
-			"df_directory3_in": {
+			"df_directory3": {
 				"type": "string"
 			}
 		},
