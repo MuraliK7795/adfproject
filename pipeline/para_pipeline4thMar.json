@@ -178,6 +178,9 @@
 			},
 			"pp_directory3_arch": {
 				"type": "string"
+			},
+			"pp_filename3": {
+				"type": "string"
 			}
 		},
 		"folder": {
