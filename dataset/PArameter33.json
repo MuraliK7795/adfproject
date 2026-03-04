@@ -11,6 +11,9 @@
 			},
 			"df_directory3": {
 				"type": "string"
+			},
+			"df_filename3": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
