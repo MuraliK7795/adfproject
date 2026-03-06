@@ -31,6 +31,14 @@
 				}
 			}
 		],
+		"parameters": {
+			"pp_project": {
+				"type": "string"
+			},
+			"pp_status": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }
