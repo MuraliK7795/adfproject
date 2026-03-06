@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select * from [Project].[config] where status = 'Active' and project = 'sales'",
+						"sqlReaderQuery": "select * from [Project].[config]",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -45,10 +45,13 @@
 						"value": "@activity('Lookup1').output.value",
 						"type": "Expression"
 					},
+					"isSequential": false,
 					"activities": [
 						{
 							"name": "Execute Pipeline1",
 							"type": "ExecutePipeline",
+							"state": "Inactive",
+							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [],
 							"policy": {
 								"secureInput": false
@@ -78,6 +81,15 @@
 										"type": "Expression"
 									}
 								}
+							}
+						},
+						{
+							"name": "Wait1",
+							"type": "Wait",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 1
 							}
 						}
 					]
