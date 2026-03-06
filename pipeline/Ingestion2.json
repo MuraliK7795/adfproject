@@ -18,7 +18,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "@concat('select * from [Project].[config]')",
+							"value": "@concat('select * from [Project].[config] where status = ''Active'' and project = ''sales''' )",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
