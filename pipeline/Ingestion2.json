@@ -18,7 +18,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "@concat('select * from [Project].[config] where status = ''Active'' and project = ''sales''' )",
+							"value": "@concat('select * from [Project].[config] where status = ''',pipeline().parameters.pp_status,''' and project = ''',pipeline().parameters.pp_project,'''' )",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -33,10 +33,12 @@
 		],
 		"parameters": {
 			"pp_project": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "sales"
 			},
 			"pp_status": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "Active"
 			}
 		},
 		"annotations": []
