@@ -275,13 +275,8 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Parameter_Dataset",
-						"type": "DatasetReference",
-						"parameters": {
-							"df_filesystem": "project",
-							"df_directory": "sql_output",
-							"df_filename": "outputblue.txt"
-						}
+						"referenceName": "Delimitedforsql",
+						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
