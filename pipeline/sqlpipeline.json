@@ -19,7 +19,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select productID,name,color from [SalesLT].[Product]",
+						"sqlReaderQuery": "select productID,name,color from [SalesLT].[Product] where color = 'Blue'",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -57,7 +57,7 @@
 						"parameters": {
 							"df_filesystem": "project",
 							"df_directory": "sql_output",
-							"df_filename": "output.txt"
+							"df_filename": "outputblue.txt"
 						}
 					}
 				]
