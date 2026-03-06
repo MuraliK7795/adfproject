@@ -17,7 +17,10 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select * from [Project].[config] where status = 'Active' and project = 'sales'",
+						"sqlReaderQuery": {
+							"value": "@concat('select * from [Project].[config]')",
+							"type": "Expression"
+						},
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
