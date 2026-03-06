@@ -62,7 +62,7 @@
 				]
 			},
 			{
-				"name": "Copy data2",
+				"name": "table to file 2",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
