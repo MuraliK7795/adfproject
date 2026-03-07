@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "SalesLTProductDescription.txt",
+				"fileName": "SalesLTProductModel.txt",
 				"folderPath": "input",
 				"fileSystem": "project"
 			},
