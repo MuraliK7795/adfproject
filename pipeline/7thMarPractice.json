@@ -14,11 +14,13 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select * from [Project].[config] where status = 'active' and project = 'sales'\n",
+						"sqlReaderQuery": {
+							"value": "@concat('select * from [Project].[config] where status = ''Active'' and project = ''sales'''\r\n)",
+							"type": "Expression"
+						},
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
