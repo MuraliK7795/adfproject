@@ -111,7 +111,7 @@
 					"notebookPath": "/Users/krishnaamurali991@gmail.com/12thMarch",
 					"baseParameters": {
 						"pp_filename": {
-							"value": "@concat(pipeline().parameters.filesystem,'/',pipeline().parameters.directory_out,'/',pipeline().parameters.filename)",
+							"value": "@concat(\n'abfss://',\npipeline().parameters.filesystem,\n'@murali251102adls.dfs.core.windows.net/',\npipeline().parameters.directory_out,\n'/',\npipeline().parameters.filename\n)",
 							"type": "Expression"
 						}
 					}
