@@ -33,7 +33,7 @@
 				"typeProperties": {
 					"baseParameters": {
 						"pp_filename": {
-							"value": "@concat(pipeline().parameters.pp_filesystem,'/',pipeline().parameters.pp_directory,'/',pipeline().parameters.pp_filename)",
+							"value": "@concat(pipeline().parameters.filesystem,'/',pipeline().parameters.directory,'/',pipeline().parameters.filename)",
 							"type": "Expression"
 						}
 					}
