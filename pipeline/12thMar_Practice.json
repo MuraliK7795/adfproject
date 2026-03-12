@@ -57,7 +57,7 @@
 								"type": "Expression"
 							},
 							"df_directory": {
-								"value": "@pipeline().parameters.directory",
+								"value": "@pipeline().parameters.directory_in",
 								"type": "Expression"
 							},
 							"df_filename": {
@@ -70,7 +70,21 @@
 				"outputs": [
 					{
 						"referenceName": "Para12thMar",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"df_filesystem": {
+								"value": "@pipeline().parameters.filesystem",
+								"type": "Expression"
+							},
+							"df_directory": {
+								"value": "@pipeline().parameters.directory_out",
+								"type": "Expression"
+							},
+							"df_filename": {
+								"value": "@pipeline().parameters.filename",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			},
@@ -97,7 +111,7 @@
 					"notebookPath": "/Users/krishnaamurali991@gmail.com/12thMarch",
 					"baseParameters": {
 						"pp_filename": {
-							"value": "@concat(pipeline().parameters.filesystem,'/',pipeline().parameters.directory,'/',pipeline().parameters.filename)",
+							"value": "@concat(pipeline().parameters.filesystem,'/',pipeline().parameters.directory_out,'/',pipeline().parameters.filename)",
 							"type": "Expression"
 						}
 					}
@@ -127,8 +141,78 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"enableStaging": false
-				}
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Para12thMar",
+						"type": "DatasetReference",
+						"parameters": {
+							"df_filesystem": {
+								"value": "@pipeline().parameters.filesystem",
+								"type": "Expression"
+							},
+							"df_directory": {
+								"value": "@pipeline().parameters.directory_out",
+								"type": "Expression"
+							},
+							"df_filename": {
+								"value": "@pipeline().parameters.filename",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Para12thMar",
+						"type": "DatasetReference",
+						"parameters": {
+							"df_filesystem": {
+								"value": "@pipeline().parameters.filesystem",
+								"type": "Expression"
+							},
+							"df_directory": {
+								"value": "@pipeline().parameters.directory_arch",
+								"type": "Expression"
+							},
+							"df_filename": {
+								"value": "@pipeline().parameters.filename",
+								"type": "Expression"
+							}
+						}
+					}
+				]
 			}
 		],
 		"parameters": {
