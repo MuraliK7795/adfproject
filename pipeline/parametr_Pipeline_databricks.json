@@ -1,0 +1,241 @@
+{
+	"name": "parametr_Pipeline_databricks",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Parameter_Dataset2",
+						"type": "DatasetReference",
+						"parameters": {
+							"df_filesystem2": {
+								"value": "@pipeline().parameters.pp_filesystem2",
+								"type": "Expression"
+							},
+							"df_directory2": {
+								"value": "@pipeline().parameters.pp_directory2_in",
+								"type": "Expression"
+							},
+							"df_filename2": {
+								"value": "@pipeline().parameters.pp_filename2",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Parameter_Dataset2",
+						"type": "DatasetReference",
+						"parameters": {
+							"df_filesystem2": {
+								"value": "@pipeline().parameters.pp_filesystem2",
+								"type": "Expression"
+							},
+							"df_directory2": {
+								"value": "@pipeline().parameters.pp_directory2_out",
+								"type": "Expression"
+							},
+							"df_filename2": {
+								"value": "@pipeline().parameters.pp_filename2",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			},
+			{
+				"name": "Copy data2",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Copy data1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Parameter_Dataset2",
+						"type": "DatasetReference",
+						"parameters": {
+							"df_filesystem2": {
+								"value": "@pipeline().parameters.pp_filesystem2",
+								"type": "Expression"
+							},
+							"df_directory2": {
+								"value": "@pipeline().parameters.pp_directory2_out",
+								"type": "Expression"
+							},
+							"df_filename2": {
+								"value": "@pipeline().parameters.pp_filename2",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Parameter_Dataset2",
+						"type": "DatasetReference",
+						"parameters": {
+							"df_filesystem2": {
+								"value": "@pipeline().parameters.pp_filesystem2",
+								"type": "Expression"
+							},
+							"df_directory2": {
+								"value": "@pipeline().parameters.pp_directory2_arch",
+								"type": "Expression"
+							},
+							"df_filename2": {
+								"value": "@pipeline().parameters.pp_filename2",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			},
+			{
+				"name": "Notebook1",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/krishnaamurali991@gmail.com/Training 1",
+					"baseParameters": {
+						"pp_filesystem": {
+							"value": "@pipeline().parameters.pp_filesystem2",
+							"type": "Expression"
+						},
+						"pp_directory_in": {
+							"value": "@pipeline().parameters.pp_directory2_in",
+							"type": "Expression"
+						},
+						"pp_filename": {
+							"value": "@pipeline().parameters.pp_filename2",
+							"type": "Expression"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks1",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"parameters": {
+			"pp_filesystem2": {
+				"type": "string"
+			},
+			"pp_directory2_in": {
+				"type": "string"
+			},
+			"pp_directory2_out": {
+				"type": "string"
+			},
+			"pp_filename2": {
+				"type": "string"
+			},
+			"pp_directory2_arch": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "Project1"
+		},
+		"annotations": []
+	}
+}
