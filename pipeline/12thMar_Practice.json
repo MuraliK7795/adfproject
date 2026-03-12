@@ -1,0 +1,79 @@
+{
+	"name": "12thMar_Practice",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"enableStaging": false
+				}
+			},
+			{
+				"name": "Notebook1",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"baseParameters": {
+						"pp_filename": {
+							"value": "@concat(pipeline().parameters.pp_filesystem,'/',pipeline().parameters.pp_directory,'/',pipeline().parameters.pp_filename)",
+							"type": "Expression"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks12",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Copy data2",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"enableStaging": false
+				}
+			}
+		],
+		"parameters": {
+			"filesystem": {
+				"type": "string"
+			},
+			"directory": {
+				"type": "string"
+			},
+			"filename": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "Project1"
+		},
+		"annotations": []
+	}
+}
