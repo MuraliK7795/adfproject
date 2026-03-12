@@ -15,13 +15,76 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"enableStaging": false
-				}
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Para12thMar",
+						"type": "DatasetReference",
+						"parameters": {
+							"df_filesystem": {
+								"value": "@pipeline().parameters.filesystem",
+								"type": "Expression"
+							},
+							"df_directory": {
+								"value": "@pipeline().parameters.directory",
+								"type": "Expression"
+							},
+							"df_filename": {
+								"value": "@pipeline().parameters.filename",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Para12thMar",
+						"type": "DatasetReference"
+					}
+				]
 			},
 			{
 				"name": "Notebook1",
 				"type": "DatabricksNotebook",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Copy data1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -31,6 +94,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"notebookPath": "/Users/krishnaamurali991@gmail.com/12thMarch",
 					"baseParameters": {
 						"pp_filename": {
 							"value": "@concat(pipeline().parameters.filesystem,'/',pipeline().parameters.directory,'/',pipeline().parameters.filename)",
@@ -46,7 +110,14 @@
 			{
 				"name": "Copy data2",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Notebook1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -64,10 +135,16 @@
 			"filesystem": {
 				"type": "string"
 			},
-			"directory": {
+			"directory_in": {
 				"type": "string"
 			},
 			"filename": {
+				"type": "string"
+			},
+			"directory_out": {
+				"type": "string"
+			},
+			"directory_arch": {
 				"type": "string"
 			}
 		},
