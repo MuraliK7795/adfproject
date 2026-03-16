@@ -1,5 +1,5 @@
 {
-	"name": "Project final",
+	"name": "Extract",
 	"properties": {
 		"activities": [
 			{
@@ -33,7 +33,7 @@
 						"type": "DelimitedTextSink",
 						"storeSettings": {
 							"type": "AzureBlobFSWriteSettings",
-							"copyBehavior": "FlattenHierarchy"
+							"copyBehavior": "PreserveHierarchy"
 						},
 						"formatSettings": {
 							"type": "DelimitedTextWriteSettings",
