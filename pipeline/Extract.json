@@ -179,7 +179,7 @@
 									{
 										"type": "Query",
 										"text": {
-											"value": "@concat(\n'Insert into project.audit2 values (''',\nitem().filename,\n''', current_timestamp)'\n)",
+											"value": "@concat(\n'Insert into project.audit2 values (''',\nitem().name,\n''', current_timestamp)'\n)",
 											"type": "Expression"
 										}
 									}
