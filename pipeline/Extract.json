@@ -20,8 +20,8 @@
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": true,
-							"wildcardFolderPath": "source/AdventureWorksLTDEPOC",
-							"wildcardFileName": "*",
+							"wildcardFolderPath": "source",
+							"wildcardFileName": "Adventure/*",
 							"deleteFilesAfterCompletion": false
 						},
 						"formatSettings": {
@@ -35,7 +35,7 @@
 						"type": "BinarySink",
 						"storeSettings": {
 							"type": "AzureBlobFSWriteSettings",
-							"copyBehavior": "PreserveHierarchy"
+							"copyBehavior": "FlattenHierarchy"
 						}
 					},
 					"enableStaging": false
