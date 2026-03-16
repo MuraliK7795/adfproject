@@ -1,5 +1,5 @@
 {
-	"name": "SalesCopySource",
+	"name": "SalesCopySink",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureDataLakeStorage1",
@@ -10,11 +10,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": {
-					"value": "@item().name",
+				"folderPath": {
+					"value": "@if(\nand(\nstartsWith(item().name,'SalesLT'),\nendswith(item().name,'.txt')\n),\n'sales',\n'others'\n)",
 					"type": "Expression"
 				},
-				"folderPath": "extracted/AdventureWorksLTDEPOC.zip/AdventureWorksLTDEPOC",
 				"fileSystem": "project"
 			}
 		}

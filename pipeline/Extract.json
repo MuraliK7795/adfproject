@@ -111,8 +111,6 @@
 						{
 							"name": "Copy data2",
 							"type": "Copy",
-							"state": "Inactive",
-							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [],
 							"policy": {
 								"timeout": "0.12:00:00",
@@ -127,10 +125,17 @@
 									"type": "BinarySource",
 									"storeSettings": {
 										"type": "AzureBlobFSReadSettings",
-										"recursive": true
+										"fileListPath": "project/extracted/AdventureWorksLTDEPOC.zip/AdventureWorksLTDEPOC",
+										"deleteFilesAfterCompletion": false
 									},
 									"formatSettings": {
 										"type": "BinaryReadSettings"
+									}
+								},
+								"sink": {
+									"type": "BinarySink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
 									}
 								},
 								"enableStaging": false
@@ -140,24 +145,13 @@
 									"referenceName": "SalesCopySource",
 									"type": "DatasetReference"
 								}
-							]
-						},
-						{
-							"name": "Set variable1",
-							"type": "SetVariable",
-							"dependsOn": [],
-							"policy": {
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"variableName": "file_names",
-								"value": {
-									"value": "@item().name",
-									"type": "Expression"
+							],
+							"outputs": [
+								{
+									"referenceName": "SalesCopySink",
+									"type": "DatasetReference"
 								}
-							}
+							]
 						}
 					]
 				}
